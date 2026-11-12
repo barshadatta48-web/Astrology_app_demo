@@ -83,6 +83,19 @@ function Overview({ onNavigate }) {
       <Feature icon={CalendarDays} title="Panchang" desc="Discover the five elements of the traditional Vedic calendar." tag="DAILY ALMANAC" onClick={() => onNavigate('panchang')}/>
       <Feature icon={MoonStar} title="Horoscope" desc="Reflect on today's themes for your zodiac sign." tag="DAILY GUIDANCE" onClick={() => onNavigate('horoscope')}/>
     </div>
+    <section className="counselling-card" aria-label="Astrology counselling demo price">
+      <div className="counselling-copy">
+        <div className="eyebrow">PERSONAL GUIDANCE · DEMO OFFERING</div>
+        <h2>One-to-one astrology counselling</h2>
+        <p>Discuss your questions and explore your chart in a sample personal guidance session.</p>
+        <span className="counselling-note">Demo price only · No booking or payment is enabled</span>
+      </div>
+      <div className="counselling-price">
+        <span className="price-label">SAMPLE SESSION</span>
+        <strong>₹499</strong>
+        <span>per 30 minutes</span>
+      </div>
+    </section>
     <div className="bottom-grid"><div className="panel moon-panel"><div className="panel-head"><div><div className="eyebrow">LUNAR OBSERVATION</div><h3>Moon phase</h3></div><MoonStar size={19}/></div><div className="moon-visual"><div className="moon-shape"/><div><strong>Waxing crescent</strong><p className="muted">A symbol of intention and new beginnings.</p></div></div><div className="panel-foot">ILLUSTRATIVE PHASE · NOT LIVE ASTRONOMICAL DATA</div></div><div className="panel profile-panel"><div className="panel-head"><div><div className="eyebrow">YOUR PROFILE</div><h3>Birth details</h3></div><UserRound size={19}/></div><div className="profile-line"><span>Name</span><strong>Demo Seeker</strong></div><div className="profile-line"><span>Tradition</span><strong>Vedic astrology</strong></div><div className="profile-line"><span>Chart status</span><strong className="gold-text">Sample chart</strong></div><button className="text-button" onClick={() => onNavigate('kundli')}>View birth chart <ChevronRight size={15}/></button></div></div>
   </div>
 }
