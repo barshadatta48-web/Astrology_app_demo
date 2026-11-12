@@ -26,7 +26,7 @@ const sections = [
 
 function Login({ onLogin }) {
   const [username, setUsername] = useState('owner')
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState('Cosmic@2026')
   const [error, setError] = useState('')
   function submit(e) {
     e.preventDefault()
