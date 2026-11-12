@@ -104,6 +104,7 @@ function Overview({ onNavigate }) {
 
 
 function Pricing() {
+  const [selectedPlan, setSelectedPlan] = useState('')
   const plans = [
     { name: 'Cosmic Starter', price: 'Free', period: 'forever', description: 'A gentle introduction to your cosmic workspace.', features: ['Explore the sample birth chart', 'Daily horoscope reflections', 'Panchang overview', 'Basic planetary positions'], action: 'Start exploring', featured: false },
     { name: 'Cosmic Plus', price: '₹499', period: 'per month', description: 'More room for deeper personal astrology exploration.', features: ['Everything in Starter', 'Expanded chart insights', 'Personalized horoscope themes', 'Save favourite readings'], action: 'Choose Cosmic Plus', featured: true },
@@ -120,9 +121,9 @@ function Pricing() {
       <div className="pricing-divider"/>
       <div className="pricing-includes">WHAT'S INCLUDED</div>
       <ul>{plan.features.map(feature => <li key={feature}><ShieldCheck size={15}/>{feature}</li>)}</ul>
-      <button className={plan.featured ? 'pricing-action primary-action' : 'pricing-action'} onClick={() => {}}>{plan.action}<ArrowUpRight size={15}/></button>
+      <button className={plan.featured ? 'pricing-action primary-action' : 'pricing-action'} onClick={() => setSelectedPlan(plan.name)}>{selectedPlan === plan.name ? 'Selected for demo' : plan.action}<ArrowUpRight size={15}/></button>
     </article>)}</div>
-    <div className="pricing-footnote">All prices and plan features are illustrative placeholders for this demo and can be customized before launch.</div>
+    <div className="pricing-footnote">{selectedPlan ? `${selectedPlan} is selected in this demo. No subscription or payment has been started.` : 'All prices and plan features are illustrative placeholders for this demo and can be customized before launch.'}</div>
   </section>
 }
 
