@@ -41,7 +41,7 @@ function App() {
 
   return <div className="app-shell">
     <aside className={mobileOpen ? 'sidebar open' : 'sidebar'}>
-      <div className="brand"><div className="brand-mark"><Orbit size={21}/></div><span>astro<span className="brand-accent">verse</span></span><button className="mobile-close" onClick={() => setMobileOpen(false)}><X size={18}/></button></div>
+      <div className="brand"><div className="brand-mark"><Sparkles size={21}/></div><span>astro<span className="brand-accent">verse</span></span><button className="mobile-close" onClick={() => setMobileOpen(false)}><X size={18}/></button></div>
       <div className="workspace-label">COSMIC WORKSPACE</div>
       <nav>
         {sections.map(item => <button key={item.id} onClick={() => navigate(item.id)} className={active === item.id ? 'nav-item selected' : 'nav-item'}><item.icon size={18}/><span>{item.label}</span>{active === item.id && <span className="nav-dot"/>}</button>)}
@@ -77,7 +77,7 @@ function PageHeading({ eyebrow, title, desc }) {
 
 function Overview({ onNavigate }) {
   return <div className="overview">
-    <div className="welcome-row"><div><div className="eyebrow">WEDNESDAY · COSMIC INSIGHTS</div><h1>Your universe, <em>unfolding.</em></h1><p className="muted">A moment to pause, reflect, and reconnect with your path.</p></div><div className="welcome-orbit"><div className="orbit-ring ring-one"/><div className="orbit-ring ring-two"/><div className="orbit-core">✦</div><span className="orbit-star s-one">✧</span><span className="orbit-star s-two">✦</span></div></div>
+    <div className="welcome-row"><div><div className="eyebrow">WEDNESDAY · COSMIC INSIGHTS</div><h1>Your universe, <em>unfolding.</em></h1><p className="muted">A moment to pause, reflect, and reconnect with your path.</p></div></div>
     <div className="hero-card"><div className="hero-copy"><div className="hero-tag"><Sparkles size={14}/> TODAY'S COSMIC NOTE</div><h2>Trust the timing<br/>of your <em>becoming.</em></h2><p>Growth often begins quietly. Give your ideas room to take shape before asking them to bloom.</p><button className="light-button" onClick={() => onNavigate('horoscope')}>Read your horoscope <ArrowUpRight size={16}/></button></div><div className="hero-art"><span className="art-star a">✦</span><span className="art-star b">✧</span><span className="art-star c">·</span></div><div className="hero-caption">THE ART OF ALIGNMENT <span>✧</span></div></div>
     <div className="section-title-row"><div><div className="eyebrow">YOUR ASTROLOGY</div><h2>Explore your chart</h2></div><span className="subtle-link">DEMO PROFILE <span>✦</span></span></div>
     <div className="feature-grid">
