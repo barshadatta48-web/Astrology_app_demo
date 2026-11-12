@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import {
   Sparkles, LayoutDashboard, Orbit, CalendarDays, MoonStar, Sun,
-  Stars, Settings, LogOut, Menu, X, Search, Bell, ChevronRight,
+  Stars, Settings, Menu, X, Search, Bell, ChevronRight,
   ArrowUpRight, CircleHelp, Clock3, MapPin, UserRound, WandSparkles,
   ChartNoAxesCombined, BookOpen, Compass, ShieldCheck
 } from 'lucide-react'
@@ -24,41 +24,7 @@ const sections = [
   { id: 'planets', label: 'Planetary positions', icon: Stars },
 ]
 
-function Login({ onLogin }) {
-  const [username, setUsername] = useState('owner')
-  const [password, setPassword] = useState('Cosmic@2026')
-  const [error, setError] = useState('')
-  function submit(e) {
-    e.preventDefault()
-    if (username.trim() === 'owner' && password === 'Cosmic@2026') {
-      onLogin()
-    } else {
-      setError('That username or password does not match the demo account.')
-    }
-  }
-  return <main className="login-screen">
-    <div className="login-nebula" />
-    <div className="login-card">
-      <div className="brand-mark large"><Orbit size={25}/></div>
-      <div className="eyebrow centered">YOUR COSMIC COMPASS</div>
-      <h1>Welcome to <em>AstroVerse</em></h1>
-      <p className="muted centered">A little perspective from the stars.</p>
-      <form onSubmit={submit} className="login-form">
-        <label>Owner username</label>
-        <input value={username} onChange={e => setUsername(e.target.value)} autoComplete="username" />
-        <label>Password</label>
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter demo password" autoComplete="current-password" />
-        {error && <div className="error">{error}</div>}
-        <button className="primary full" type="submit">Enter your universe <ArrowUpRight size={17}/></button>
-      </form>
-      <div className="login-hint"><ShieldCheck size={14}/> Demo access · owner / Cosmic@2026</div>
-      <p className="tiny centered">Demo-only login. Do not use for sensitive or private information.</p>
-    </div>
-  </main>
-}
-
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false)
   const [active, setActive] = useState('overview')
   const [mobileOpen, setMobileOpen] = useState(false)
   const [query, setQuery] = useState('')
@@ -66,8 +32,6 @@ function App() {
 
   const current = sections.find(s => s.id === active)
   const filteredPlanets = useMemo(() => demoPlanets.filter(p => p.join(' ').toLowerCase().includes(query.toLowerCase())), [query])
-
-  if (!loggedIn) return <Login onLogin={() => setLoggedIn(true)} />
 
   function navigate(id) {
     setActive(id)
@@ -84,7 +48,6 @@ function App() {
       <div className="sidebar-bottom">
         <div className="upgrade-card"><div className="upgrade-icon"><Sparkles size={17}/></div><strong>Your cosmic journey</strong><p>Explore the patterns and possibilities in your chart.</p><button onClick={() => navigate('kundli')}>Explore chart <ChevronRight size={14}/></button></div>
         <button className="nav-item"><Settings size={18}/><span>Settings</span></button>
-        <button className="nav-item" onClick={() => setLoggedIn(false)}><LogOut size={18}/><span>Sign out</span></button>
         <div className="user-mini"><div className="avatar">O</div><div><strong>Owner</strong><small>Personal workspace</small></div><span className="online-dot"/></div>
       </div>
     </aside>
@@ -92,7 +55,7 @@ function App() {
     <main className="main-area">
       <header className="topbar">
         <div className="top-left"><button className="menu-toggle" onClick={() => setMobileOpen(true)}><Menu size={20}/></button><div className="breadcrumb">Workspace <span>/</span> <strong>{current?.label || 'Overview'}</strong></div></div>
-        <div className="top-actions"><div className="date-chip"><MoonStar size={15}/> Cosmic calendar</div><button className="icon-btn" aria-label="Notifications"><Bell size={18}/><i/></button><button className="profile-btn" onClick={() => setProfileOpen(!profileOpen)}><div className="avatar small">O</div><span>Owner</span></button>{profileOpen && <div className="profile-pop"><strong>Owner workspace</strong><small>Single-user demo</small><button onClick={() => setLoggedIn(false)}>Sign out</button></div>}</div>
+        <div className="top-actions"><div className="date-chip"><MoonStar size={15}/> Cosmic calendar</div><button className="icon-btn" aria-label="Notifications"><Bell size={18}/><i/></button><button className="profile-btn" onClick={() => setProfileOpen(!profileOpen)}><div className="avatar small">O</div><span>Owner</span></button>{profileOpen && <div className="profile-pop"><strong>Owner workspace</strong><small>Single-user demo</small></div>}</div>
       </header>
       <div className="page-content">
         {active === 'overview' && <Overview onNavigate={navigate}/>}
