@@ -22,6 +22,7 @@ const sections = [
   { id: 'panchang', label: 'Panchang', icon: CalendarDays },
   { id: 'horoscope', label: 'Horoscope', icon: MoonStar },
   { id: 'planets', label: 'Planetary positions', icon: Stars },
+  { id: 'pricing', label: 'Pricing', icon: ChartNoAxesCombined },
 ]
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
         {active === 'kundli' && <Kundli/>}
         {active === 'panchang' && <Panchang/>}
         {active === 'horoscope' && <Horoscope/>}
+        {active === 'pricing' && <Pricing/>}
         {active === 'planets' && <section className="section-page"><PageHeading eyebrow="CELESTIAL MAP" title="Planetary positions" desc="A snapshot of the graha placements in this illustrative birth chart."/><div className="search-box"><Search size={17}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search planets, signs or houses..."/></div><div className="planet-table"><div className="planet-row table-head"><span>Planet</span><span>Sign</span><span>House</span><span>Condition</span></div>{filteredPlanets.map(p => <div className="planet-row" key={p[1]}><span className="planet-name"><b>{p[0]}</b>{p[1]}</span><span>{p[2]}</span><span>{p[3]}</span><span><i className="status-pill">{p[4]}</i></span></div>)}</div><DemoNote/></section>}
         <footer className="footer"> <span>✧ Made for curious minds under a vast sky.</span><span>ASTROVERSE · COSMIC EDITION</span></footer>
       </div>
@@ -98,6 +100,30 @@ function Overview({ onNavigate }) {
     </section>
     <div className="bottom-grid"><div className="panel moon-panel"><div className="panel-head"><div><div className="eyebrow">LUNAR OBSERVATION</div><h3>Moon phase</h3></div><MoonStar size={19}/></div><div className="moon-visual"><div className="moon-shape"/><div><strong>Waxing crescent</strong><p className="muted">A symbol of intention and new beginnings.</p></div></div><div className="panel-foot">ILLUSTRATIVE PHASE · NOT LIVE ASTRONOMICAL DATA</div></div><div className="panel profile-panel"><div className="panel-head"><div><div className="eyebrow">YOUR PROFILE</div><h3>Birth details</h3></div><UserRound size={19}/></div><div className="profile-line"><span>Name</span><strong>Demo Seeker</strong></div><div className="profile-line"><span>Tradition</span><strong>Vedic astrology</strong></div><div className="profile-line"><span>Chart status</span><strong className="gold-text">Sample chart</strong></div><button className="text-button" onClick={() => onNavigate('kundli')}>View birth chart <ChevronRight size={15}/></button></div></div>
   </div>
+}
+
+
+function Pricing() {
+  const plans = [
+    { name: 'Cosmic Starter', price: 'Free', period: 'forever', description: 'A gentle introduction to your cosmic workspace.', features: ['Explore the sample birth chart', 'Daily horoscope reflections', 'Panchang overview', 'Basic planetary positions'], action: 'Start exploring', featured: false },
+    { name: 'Cosmic Plus', price: '₹499', period: 'per month', description: 'More room for deeper personal astrology exploration.', features: ['Everything in Starter', 'Expanded chart insights', 'Personalized horoscope themes', 'Save favourite readings'], action: 'Choose Cosmic Plus', featured: true },
+    { name: 'Cosmic Pro', price: '₹999', period: 'per month', description: 'A richer experience for dedicated astrology seekers.', features: ['Everything in Cosmic Plus', 'Detailed divisional chart views', 'In-depth planetary interpretations', 'Priority one-to-one guidance access'], action: 'Choose Cosmic Pro', featured: false },
+  ]
+  return <section className="section-page pricing-page">
+    <PageHeading eyebrow="COSMIC WORKSPACE" title="Choose your cosmic journey" desc="Explore the plans and find the level of guidance that feels right for you."/>
+    <div className="pricing-intro"><Sparkles size={17}/><span>Simple demo pricing · No checkout or payment is enabled</span></div>
+    <div className="pricing-grid">{plans.map(plan => <article className={plan.featured ? 'pricing-card featured' : 'pricing-card'} key={plan.name}>
+      {plan.featured && <div className="popular-label">MOST POPULAR</div>}
+      <div className="eyebrow">{plan.name.toUpperCase()}</div>
+      <h2>{plan.price}<small>{plan.period}</small></h2>
+      <p className="pricing-description">{plan.description}</p>
+      <div className="pricing-divider"/>
+      <div className="pricing-includes">WHAT'S INCLUDED</div>
+      <ul>{plan.features.map(feature => <li key={feature}><ShieldCheck size={15}/>{feature}</li>)}</ul>
+      <button className={plan.featured ? 'pricing-action primary-action' : 'pricing-action'} onClick={() => {}}>{plan.action}<ArrowUpRight size={15}/></button>
+    </article>)}</div>
+    <div className="pricing-footnote">All prices and plan features are illustrative placeholders for this demo and can be customized before launch.</div>
+  </section>
 }
 
 function Feature({ icon: Icon, title, desc, tag, onClick }) {
